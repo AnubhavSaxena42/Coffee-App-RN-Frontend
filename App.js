@@ -4,6 +4,7 @@ import CatalogueScreen from './src/screens/CatalogueScreen/CatalogueScreen';
 
 import {APP_BACKGROUND_COLOR} from './src/core/constants';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
+import CoffeeViewScreen from './src/screens/CoffeeViewScreen/CoffeeViewScreen';
 
 const App = () => {
   console.log('App comp', StatusBar.currentHeight);
@@ -14,7 +15,8 @@ const App = () => {
         flex: 1,
         backgroundColor: APP_BACKGROUND_COLOR,
       }}>
-      <CatalogueScreen />
+      {/* <CatalogueScreen /> */}
+      <CoffeeViewScreen />
     </View>
   );
 };

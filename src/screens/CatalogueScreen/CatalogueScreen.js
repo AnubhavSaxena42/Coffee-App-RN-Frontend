@@ -1,16 +1,9 @@
-import {
-  View,
-  Image,
-  TextInput,
-  ScrollView,
-  FlatList,
-  Text,
-  Pressable,
-} from 'react-native';
+import {View, Image, TextInput, ScrollView, FlatList} from 'react-native';
 import React, {useState} from 'react';
 import {styles} from './styles';
 import CategoryItem from './CategoryItem';
 import {Coffees} from '../../core/dummyData';
+import CatalogueItem from './CatalogueItem';
 
 const CatalogueScreen = () => {
   const [searchString, setSearchString] = useState('');
@@ -61,30 +54,7 @@ const CatalogueScreen = () => {
               numColumns={2}
               contentContainerStyle={styles.catalogueItemsFlatListContainer}
               columnWrapperStyle={styles.catalogueItemsFlatListColumnWrapper}
-              renderItem={() => {
-                return (
-                  <View style={styles.catalogueItem}>
-                    <Image
-                      style={styles.catalogueItemImage}
-                      source={{
-                        uri: 'https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-                      }}
-                      resizeMode={'cover'}
-                    />
-                    <Text style={styles.catalogueItemTxt}>
-                      Bursting Blueberry
-                    </Text>
-                    <View style={styles.catalogueItemQtySelector}>
-                      <View style={styles.catalogueItemPriceContainer}>
-                        <Text style={styles.catalogueItemPriceTxt}>$300</Text>
-                      </View>
-                      <Pressable style={styles.catalogueItemAddBtn}>
-                        <Text>plus</Text>
-                      </Pressable>
-                    </View>
-                  </View>
-                );
-              }}
+              renderItem={({item, index}) => <CatalogueItem coffee={item} />}
             />
           </View>
         </View>
