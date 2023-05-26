@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {APP_BACKGROUND_COLOR} from '../../core/constants';
+import {APP_BACKGROUND_COLOR, FONTS} from '../../core/constants';
 
 export const styles = StyleSheet.create({
   catalogueScreenContainer: {
@@ -40,12 +40,14 @@ export const styles = StyleSheet.create({
     height: '100%',
     width: '80%',
     color: '#EFE3C8',
+    fontFamily: FONTS.ROSARIVO_REGULAR,
     marginLeft: 10,
     fontSize: 12,
   },
   rotateText: {
     color: '#EFE3C8',
     fontSize: 12,
+    fontFamily: FONTS.ROSARIVO_REGULAR,
     marginBottom: -4,
     transform: [{rotate: '-90deg'}],
   },
@@ -76,6 +78,7 @@ export const styles = StyleSheet.create({
     marginBottom: 5,
   },
   catalogueItemTxt: {
+    fontFamily: FONTS.ROSARIVO_REGULAR,
     color: 'white',
     fontSize: 12,
     textAlign: 'center',
@@ -94,6 +97,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   catalogueItemPriceTxt: {
+    fontFamily: FONTS.ROSARIVO_REGULAR,
     color: 'white',
     fontSize: 14,
   },

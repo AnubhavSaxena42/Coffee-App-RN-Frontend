@@ -1,6 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {
   APP_BACKGROUND_COLOR,
+  FONTS,
   SCREEN_HORIZONTAL_PADDING,
 } from '../../core/constants';
 
@@ -15,6 +16,7 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     color: 'white',
     marginBottom: 15,
+    fontFamily: FONTS.ROSARIVO_REGULAR,
   },
   cartItemsContainer: {
     paddingBottom: 10,
@@ -36,7 +38,11 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-around',
     marginLeft: 10,
   },
-  cartItemInfoTxt: {fontSize: 12, color: 'white'},
+  cartItemInfoTxt: {
+    fontSize: 12,
+    fontFamily: FONTS.ROSARIVO_REGULAR,
+    color: 'white',
+  },
   cartItemQtyContainer: {
     width: 100,
     height: '100%',
@@ -59,7 +65,11 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
   },
-  cartItemQtyTxt: {fontSize: 12, color: 'white'},
+  cartItemQtyTxt: {
+    fontFamily: FONTS.ROSARIVO_REGULAR,
+    fontSize: 12,
+    color: 'white',
+  },
   deliveryTaxesContainer: {
     height: 80,
     borderBottomWidth: 0.5,
@@ -73,7 +83,11 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  deliveryTaxesTxt: {fontSize: 12, color: 'white'},
+  deliveryTaxesTxt: {
+    fontFamily: FONTS.ROSARIVO_REGULAR,
+    fontSize: 12,
+    color: 'white',
+  },
   totalContainer: {
     height: 100,
     width: '100%',
@@ -87,7 +101,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: '2%',
     alignItems: 'center',
   },
-  totalTxt: {fontSize: 20, color: 'white'},
+  totalTxt: {fontFamily: FONTS.ROSARIVO_REGULAR, fontSize: 20, color: 'white'},
   payNowBtn: {
     height: 48,
     width: '100%',
@@ -97,7 +111,11 @@ export const styles = StyleSheet.create({
     borderRadius: 15,
     backgroundColor: '#EFE3C8',
   },
-  payNowBtnTxt: {color: '#4A2B29', fontSize: 16},
+  payNowBtnTxt: {
+    fontFamily: FONTS.ROSARIVO_REGULAR,
+    color: '#4A2B29',
+    fontSize: 16,
+  },
   cartScreenScrollView: {
     flexGrow: 1,
     justifyContent: 'space-between',

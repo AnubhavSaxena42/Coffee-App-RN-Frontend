@@ -1,0 +1,13 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/Rosarivo-Italic.ttf",
+      "sha1": "5016a4bb16951a38a7c544e0376bd9d219002ad8"
+    },
+    {
+      "path": "src/assets/fonts/Rosarivo-Regular.ttf",
+      "sha1": "92f8abfbb2434fefae7293baf3e9c0695d78b0a0"
+    }
+  ]
+}
