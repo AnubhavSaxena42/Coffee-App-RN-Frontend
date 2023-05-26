@@ -1,10 +1,14 @@
 import {StyleSheet} from 'react-native';
-import {SCREEN_HORIZONTAL_PADDING} from '../../core/constants';
+import {
+  APP_BACKGROUND_COLOR,
+  SCREEN_HORIZONTAL_PADDING,
+} from '../../core/constants';
 
 export const styles = StyleSheet.create({
   cartScreenContainer: {
     flex: 1,
     paddingHorizontal: SCREEN_HORIZONTAL_PADDING,
+    backgroundColor: APP_BACKGROUND_COLOR,
   },
   cartScreenHeaderTxt: {
     fontSize: 25,
@@ -70,7 +74,12 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   deliveryTaxesTxt: {fontSize: 12, color: 'white'},
-  totalContainer: {height: 100, width: '100%', justifyContent: 'space-between'},
+  totalContainer: {
+    height: 100,
+    width: '100%',
+    marginBottom: 10,
+    justifyContent: 'space-between',
+  },
   totalRow: {
     width: '100%',
     justifyContent: 'space-between',
@@ -80,7 +89,7 @@ export const styles = StyleSheet.create({
   },
   totalTxt: {fontSize: 20, color: 'white'},
   payNowBtn: {
-    height: 53,
+    height: 48,
     width: '100%',
     alignSelf: 'center',
     justifyContent: 'center',
