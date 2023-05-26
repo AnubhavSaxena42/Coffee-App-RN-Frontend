@@ -2,6 +2,7 @@ import {View, Image, ScrollView, Text, Pressable} from 'react-native';
 import React from 'react';
 import {styles} from './styles';
 import MilkChoice from './MilkChoice';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const CoffeeViewScreen = () => {
   return (
@@ -20,10 +21,13 @@ const CoffeeViewScreen = () => {
           <Text style={styles.coffeeNameTxt}>Cappucino</Text>
           <View style={styles.taglineRatingContainer}>
             <Text style={styles.taglineTxt}>Drizzled with Caramel</Text>
-            <Text style={styles.ratingTxt}>stars4.5</Text>
+            <View style={{flexDirection: 'row', alignItems: 'flex-end'}}>
+              <AntDesign name="star" color="#D3A601" size={12} />
+              <Text style={{...styles.ratingTxt, marginLeft: 5}}>4.5</Text>
+            </View>
           </View>
         </View>
-        <Text style={{fontSize: 20, color: 'white'}}>Heart</Text>
+        <AntDesign name="heart" size={22} color="red" />
       </View>
       {/* Coffee Description */}
       <View style={styles.descriptionContainer}>

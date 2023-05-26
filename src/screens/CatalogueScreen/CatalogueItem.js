@@ -1,6 +1,7 @@
 import {View, Text, Image, Pressable} from 'react-native';
 import React from 'react';
 import {styles} from './styles';
+import Entypo from 'react-native-vector-icons/Entypo';
 
 const CatalogueItem = ({coffee}) => {
   return (
@@ -18,7 +19,7 @@ const CatalogueItem = ({coffee}) => {
           <Text style={styles.catalogueItemPriceTxt}>$300</Text>
         </View>
         <Pressable style={styles.catalogueItemAddBtn}>
-          <Text>plus</Text>
+          <Entypo name="plus" color="black" size={22} />
         </Pressable>
       </View>
     </View>

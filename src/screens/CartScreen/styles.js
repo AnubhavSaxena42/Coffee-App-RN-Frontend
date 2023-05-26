@@ -89,4 +89,9 @@ export const styles = StyleSheet.create({
     backgroundColor: '#EFE3C8',
   },
   payNowBtnTxt: {color: '#4A2B29', fontSize: 16},
+  cartScreenScrollView: {
+    flexGrow: 1,
+    justifyContent: 'space-between',
+    paddingBottom: 10,
+  },
 });

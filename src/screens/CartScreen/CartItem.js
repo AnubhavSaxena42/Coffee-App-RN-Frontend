@@ -1,6 +1,7 @@
 import {View, Text, Image, Pressable} from 'react-native';
 import React from 'react';
 import {styles} from './styles';
+import Entypo from 'react-native-vector-icons/Entypo';
 
 const CartItem = ({cartItem}) => {
   return (
@@ -19,11 +20,15 @@ const CartItem = ({cartItem}) => {
       </View>
       <View style={styles.cartItemQtyContainer}>
         <View style={styles.cartItemQty}>
-          <Pressable style={styles.cartItemQtyBtn}></Pressable>
+          <Pressable style={styles.cartItemQtyBtn}>
+            <Entypo name="plus" color="black" size={18} />
+          </Pressable>
           <View style={styles.cartItemQtyTxtContainer}>
             <Text style={styles.cartItemQtyTxt}>1</Text>
           </View>
-          <Pressable style={styles.cartItemQtyBtn}></Pressable>
+          <Pressable style={styles.cartItemQtyBtn}>
+            <Entypo name="minus" color="black" size={18} />
+          </Pressable>
         </View>
       </View>
     </View>

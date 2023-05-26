@@ -4,6 +4,7 @@ import {styles} from './styles';
 import CategoryItem from './CategoryItem';
 import {Coffees} from '../../core/dummyData';
 import CatalogueItem from './CatalogueItem';
+import Feather from 'react-native-vector-icons/Feather';
 
 const CatalogueScreen = () => {
   const [searchString, setSearchString] = useState('');
@@ -21,6 +22,7 @@ const CatalogueScreen = () => {
       </View>
       {/* Search Bar */}
       <View style={styles.searchBarContainer}>
+        <Feather name="search" color="#EFE3C8" size={20} />
         {/* Search Icon here */}
         <TextInput
           placeholder="Browse for your favourite coffee..."

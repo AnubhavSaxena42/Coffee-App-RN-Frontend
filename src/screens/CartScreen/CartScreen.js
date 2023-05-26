@@ -1,4 +1,4 @@
-import {View, Text, Image, Pressable, ScrollView} from 'react-native';
+import {View, Text, Pressable, ScrollView} from 'react-native';
 import React from 'react';
 import {styles} from './styles';
 import CartItem from './CartItem';
@@ -9,11 +9,7 @@ const CartScreen = () => {
       <ScrollView
         bounces={false}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{
-          flexGrow: 1,
-          justifyContent: 'space-between',
-          paddingBottom: 10,
-        }}>
+        contentContainerStyle={styles.cartScreenScrollView}>
         <View>
           {/* Cart Screen Header */}
           <Text style={styles.cartScreenHeaderTxt}>Cart</Text>

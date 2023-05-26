@@ -13,6 +13,7 @@ export const styles = StyleSheet.create({
     height: 50,
     flexDirection: 'row',
     justifyContent: 'space-between',
+
     marginVertical: 10,
     paddingHorizontal: 5,
   },

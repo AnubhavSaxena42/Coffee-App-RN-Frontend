@@ -40,6 +40,7 @@ export const styles = StyleSheet.create({
     height: '100%',
     width: '80%',
     color: '#EFE3C8',
+    marginLeft: 10,
     fontSize: 12,
   },
   rotateText: {
@@ -81,10 +82,10 @@ export const styles = StyleSheet.create({
   },
   catalogueItemQtySelector: {
     width: '100%',
-    height: 40,
+    height: 30,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    borderRadius: 10,
+    borderRadius: 8,
     backgroundColor: 'rgba(255, 255, 255, 0.08)',
   },
   catalogueItemPriceContainer: {
