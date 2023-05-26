@@ -1,7 +1,8 @@
 import {Dimensions, StyleSheet} from 'react-native';
+import {SCREEN_HORIZONTAL_PADDING} from '../../core/constants';
 
 export const styles = StyleSheet.create({
-  coffeeViewScreen: {flex: 1, paddingHorizontal: '3%', paddingVertical: '4%'},
+  coffeeViewScreen: {flex: 1, paddingHorizontal: SCREEN_HORIZONTAL_PADDING},
   coffeeImage: {
     height: Dimensions.get('screen').height * 0.5,
     width: '100%',

@@ -1,1 +1,2 @@
 export const APP_BACKGROUND_COLOR = '#201520';
+export const SCREEN_HORIZONTAL_PADDING = '3%';
