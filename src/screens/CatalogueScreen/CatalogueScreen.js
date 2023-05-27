@@ -2,7 +2,6 @@ import {
   View,
   Image,
   TextInput,
-  ScrollView,
   FlatList,
   ActivityIndicator,
   RefreshControl,
@@ -140,7 +139,11 @@ const CatalogueScreen = () => {
               }
               onEndReached={() => {
                 if (coffeesPageInfo?.hasNextPage) {
-                  getCoffees({fetchingMore: true, refreshing: false});
+                  getCoffees({
+                    fetchingMore: true,
+                    refreshing: false,
+                    signal: {},
+                  });
                 }
               }}
               numColumns={2}

@@ -18,11 +18,11 @@ export const GET_CATEGORIES = gql`
 `;
 
 export const GET_COFFEES_FROM_CATEGORY = gql`
-  query ($id: ID!, $endCursor: String) {
+  query ($id: ID!, $endCursor: String, $searchString: String) {
     category(id: $id) {
       name
       id
-      coffees(first: 5, after: $endCursor) {
+      coffees(first: 5, after: $endCursor, name_Icontains: $searchString) {
         pageInfo {
           hasNextPage
           endCursor

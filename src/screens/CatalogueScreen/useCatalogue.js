@@ -18,7 +18,7 @@ export const useCatalogue = () => {
     endCursor: '',
   });
 
-  const getCoffees = async ({fetchingMore, refreshing}) => {
+  const getCoffees = async ({fetchingMore, refreshing, signal}) => {
     console.log('GetCoffeesCalled', activeIndex);
     if (!fetchingMore) {
       setCoffees([]);
@@ -29,6 +29,7 @@ export const useCatalogue = () => {
       variables: {
         id: categories[activeIndex]?.id,
         endCursor: fetchingMore ? coffeesPageInfo?.endCursor : '',
+        searchString: searchString,
       },
       fetchPolicy: 'no-cache',
     });
@@ -36,6 +37,7 @@ export const useCatalogue = () => {
     const newCoffees = coffeesResponse?.data?.category?.coffees?.edges?.map(
       ({node}) => node,
     );
+    if (signal?.aborted) return;
     setCoffees(fetchingMore ? [...coffees, ...newCoffees] : newCoffees);
     setCoffeesPageInfo(coffeesResponse?.data?.category?.coffees?.pageInfo);
     setCoffeesLoading(false);
@@ -68,10 +70,17 @@ export const useCatalogue = () => {
   }, []);
 
   useEffect(() => {
+    const controller = new AbortController();
+
     if (activeIndex !== null) {
-      getCoffees({fetchingMore: false, refreshing: false});
+      getCoffees({
+        fetchingMore: false,
+        refreshing: false,
+        signal: controller.signal,
+      });
     }
-  }, [activeIndex]);
+    return () => controller.abort();
+  }, [activeIndex, searchString]);
 
   return {
     coffees,
