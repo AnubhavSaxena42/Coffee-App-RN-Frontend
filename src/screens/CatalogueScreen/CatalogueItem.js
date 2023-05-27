@@ -9,14 +9,14 @@ const CatalogueItem = ({coffee}) => {
       <Image
         style={styles.catalogueItemImage}
         source={{
-          uri: 'https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+          uri: coffee?.imageUrl,
         }}
         resizeMode={'cover'}
       />
-      <Text style={styles.catalogueItemTxt}>Bursting Blueberry</Text>
+      <Text style={styles.catalogueItemTxt}>{coffee?.name}</Text>
       <View style={styles.catalogueItemQtySelector}>
         <View style={styles.catalogueItemPriceContainer}>
-          <Text style={styles.catalogueItemPriceTxt}>$300</Text>
+          <Text style={styles.catalogueItemPriceTxt}>${coffee?.price}</Text>
         </View>
         <Pressable style={styles.catalogueItemAddBtn}>
           <Entypo name="plus" color="black" size={22} />

@@ -60,7 +60,7 @@ export const styles = StyleSheet.create({
   catalogueScrollViewContainer: {paddingVertical: 20},
   catalogueItemsContainer: {width: '90%', paddingHorizontal: 5},
   catalogueItemsWrapperFlex: {flex: 1},
-  catalogueItemsFlatListContainer: {paddingBottom: 25},
+  catalogueItemsFlatListContainer: {paddingBottom: 25, flexGrow: 1},
   catalogueItemsFlatListColumnWrapper: {justifyContent: 'space-around'},
   catalogueItem: {
     width: '45%',

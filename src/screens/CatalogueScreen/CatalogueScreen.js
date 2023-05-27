@@ -1,13 +1,35 @@
-import {View, Image, TextInput, ScrollView, FlatList} from 'react-native';
-import React, {useState} from 'react';
+import {
+  View,
+  Image,
+  TextInput,
+  ScrollView,
+  FlatList,
+  ActivityIndicator,
+  RefreshControl,
+} from 'react-native';
+import React from 'react';
 import {styles} from './styles';
 import CategoryItem from './CategoryItem';
-import {Coffees} from '../../core/dummyData';
 import CatalogueItem from './CatalogueItem';
 import Feather from 'react-native-vector-icons/Feather';
+import {useCatalogue} from './useCatalogue';
 
 const CatalogueScreen = () => {
-  const [searchString, setSearchString] = useState('');
+  const {
+    searchString,
+    setSearchString,
+    categories,
+    getCoffees,
+    getCategories,
+    coffees,
+    coffeesPageInfo,
+    categoriesLoading,
+    coffeesLoading,
+    activeIndex,
+    setActiveIndex,
+    categoriesPageInfo,
+  } = useCatalogue();
+  console.log('active', activeIndex);
   return (
     <View style={styles.catalogueScreenContainer}>
       {/* Catalogue Header */}
@@ -37,22 +59,90 @@ const CatalogueScreen = () => {
       <View style={styles.catalogueContainer}>
         {/* Catalogue Categories */}
         <View style={styles.catalogueCategoriesContainer}>
-          <ScrollView
+          <FlatList
+            showsVerticalScrollIndicator={false}
             bounces={false}
             contentContainerStyle={styles.catalogueScrollViewContainer}
-            showsVerticalScrollIndicator={false}>
-            <CategoryItem category={'Cappucino'} />
-            <CategoryItem category={'Latte'} />
-            <CategoryItem category={'Americano'} />
-            <CategoryItem category={'Espresso'} />
-            <CategoryItem category={'Flat White'} />
-          </ScrollView>
+            data={categories}
+            keyExtractor={item => item?.id}
+            renderItem={({item, index}) => (
+              <CategoryItem
+                category={item}
+                index={index}
+                activeIndex={activeIndex}
+                setActiveIndex={setActiveIndex}
+              />
+            )}
+            ListEmptyComponent={<></>}
+            onEndReached={() => {
+              if (categoriesPageInfo?.hasNextPage) {
+                getCategories({fetchingMore: true});
+              }
+            }}
+            ListFooterComponent={() => {
+              if (categoriesPageInfo?.hasNextPage) {
+                return (
+                  <View
+                    style={{
+                      height: 80,
+                      width: '100%',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <ActivityIndicator size={'small'} color="#EFE3C8" />
+                  </View>
+                );
+              }
+              return <></>;
+            }}
+          />
         </View>
         {/* Catalogue Category Items */}
         <View style={styles.catalogueItemsContainer}>
           <View style={styles.catalogueItemsWrapperFlex}>
             <FlatList
-              data={Coffees}
+              data={coffees}
+              refreshControl={
+                <RefreshControl
+                  onRefresh={() => {
+                    getCoffees({fetchingMore: false, refreshing: true});
+                  }}
+                  refreshing={coffeesLoading}
+                  colors={['#EFE3C8', '#EFE3C8']}
+                  tintColor={'#EFE3C8'}
+                />
+              }
+              ListFooterComponent={() => {
+                if (coffeesPageInfo?.hasNextPage) {
+                  return (
+                    <View
+                      style={{
+                        height: 100,
+                        width: '100%',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}>
+                      <ActivityIndicator size={'large'} color="#EFE3C8" />
+                    </View>
+                  );
+                }
+                return <></>;
+              }}
+              ListEmptyComponent={
+                <View
+                  style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <ActivityIndicator size={'large'} color="#EFE3C8" />
+                </View>
+              }
+              onEndReached={() => {
+                if (coffeesPageInfo?.hasNextPage) {
+                  getCoffees({fetchingMore: true, refreshing: false});
+                }
+              }}
               numColumns={2}
               contentContainerStyle={styles.catalogueItemsFlatListContainer}
               columnWrapperStyle={styles.catalogueItemsFlatListColumnWrapper}

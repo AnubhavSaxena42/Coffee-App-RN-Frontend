@@ -7,6 +7,8 @@ import {getStatusBarHeight} from 'react-native-status-bar-height';
 import {NavigationContainer} from '@react-navigation/native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {MyTabs} from './src/navigation/TabNavigator';
+import {ApolloProvider} from '@apollo/client';
+import client from './src/core/client';
 
 const App = () => {
   return (
@@ -17,11 +19,13 @@ const App = () => {
           flex: 1,
           backgroundColor: APP_BACKGROUND_COLOR,
         }}>
-        <NavigationContainer>
-          <MyTabs />
-        </NavigationContainer>
-        {/* <CatalogueScreen /> */}
-        {/* <CoffeeViewScreen /> */}
+        <ApolloProvider client={client}>
+          <NavigationContainer>
+            <MyTabs />
+          </NavigationContainer>
+          {/* <CatalogueScreen /> */}
+          {/* <CoffeeViewScreen /> */}
+        </ApolloProvider>
       </SafeAreaView>
     </GestureHandlerRootView>
   );
