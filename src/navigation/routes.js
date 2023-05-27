@@ -6,4 +6,6 @@ export const ROUTES = {
   CART_STACK: 'CartStack',
   PROFILE_STACK: 'ProfileStack',
   FAVOURITES_STACK: 'FavouritesStack',
+  SETTINGS_SCREEN: 'SettingsScreen',
+  FAVOURITES_SCREEN: 'FavouritesScreen',
 };
