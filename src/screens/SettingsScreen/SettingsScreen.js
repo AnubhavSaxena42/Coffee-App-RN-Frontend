@@ -6,6 +6,7 @@ import {deleteAllItemsFromStorage} from '../../services/storage-service';
 import {ROUTES} from '../../navigation/routes';
 import {useReactiveVar} from '@apollo/client';
 import {userVar} from '../../core/reactiveVariables';
+import Entypo from 'react-native-vector-icons/Entypo';
 
 const SettingsScreen = ({navigation}) => {
   const user = useReactiveVar(userVar);
@@ -17,7 +18,9 @@ const SettingsScreen = ({navigation}) => {
     <View style={styles.settingsScreenContainer}>
       {/* Profile Picture Section */}
       <View style={styles.settingsScreenProfileSection}>
-        <View style={styles.settingsScreenAvatarContainer}></View>
+        <View style={styles.settingsScreenAvatarContainer}>
+          <Entypo name="user" size={30} color="#f4ce9a" />
+        </View>
         <Text style={{marginVertical: 20, fontSize: 12, color: '#f4ce9a'}}>
           {user?.name}
         </Text>

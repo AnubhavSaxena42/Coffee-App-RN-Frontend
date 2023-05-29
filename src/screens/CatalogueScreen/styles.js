@@ -23,6 +23,8 @@ export const styles = StyleSheet.create({
     width: 60,
     borderRadius: 30,
     borderWidth: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
     borderColor: '#f4ce9a',
   },
   searchBarContainer: {

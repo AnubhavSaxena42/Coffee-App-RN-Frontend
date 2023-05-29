@@ -12,6 +12,9 @@ import CategoryItem from './CategoryItem';
 import CatalogueItem from './CatalogueItem';
 import Feather from 'react-native-vector-icons/Feather';
 import {useCatalogue} from './useCatalogue';
+import Entypo from 'react-native-vector-icons/Entypo';
+import {useReactiveVar} from '@apollo/client';
+import {userVar} from '../../core/reactiveVariables';
 
 const CatalogueScreen = () => {
   const {
@@ -28,6 +31,8 @@ const CatalogueScreen = () => {
     categoriesPageInfo,
   } = useCatalogue();
 
+  const user = useReactiveVar(userVar);
+
   return (
     <View style={styles.catalogueScreenContainer}>
       {/* Catalogue Header */}
@@ -38,7 +43,9 @@ const CatalogueScreen = () => {
           resizeMode={'contain'}
         />
         {/* Avatar container */}
-        <View style={styles.catalogueAvatarContainer}></View>
+        <View style={styles.catalogueAvatarContainer}>
+          <Entypo name="user" size={30} color="#f4ce9a" />
+        </View>
       </View>
       {/* Search Bar */}
       <View style={styles.searchBarContainer}>

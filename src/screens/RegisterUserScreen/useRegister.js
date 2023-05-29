@@ -64,6 +64,11 @@ export const useRegister = () => {
       fetchPolicy: 'no-cache',
     });
     console.log('Verify Response:', verifyResponse);
+    await saveUserInfoToStorageAndState({
+      token: tokenResponse?.data?.tokenAuth?.token,
+      refreshToken: tokenResponse?.data?.tokenAuth?.refreshToken,
+      user: tokenResponse?.data?.tokenAuth?.user,
+    });
 
     const updateAccount = await client?.mutate({
       mutation: UPDATE_ACCOUNT,
@@ -85,11 +90,7 @@ export const useRegister = () => {
     //     STORAGE_KEYS?.USER,
     //     JSON.stringify(tokenResponse?.data?.tokenAuth?.user),
     //   );
-    await saveUserInfoToStorageAndState({
-      token: tokenResponse?.data?.tokenAuth?.token,
-      refreshToken: tokenResponse?.data?.tokenAuth?.refreshToken,
-      user: tokenResponse?.data?.tokenAuth?.user,
-    });
+
     //toast and navigate to store
     navigation.replace(ROUTES.APP_VIEW);
     setRegisterLoading(false);
