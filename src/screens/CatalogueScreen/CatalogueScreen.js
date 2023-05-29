@@ -22,13 +22,12 @@ const CatalogueScreen = () => {
     getCategories,
     coffees,
     coffeesPageInfo,
-    categoriesLoading,
     coffeesLoading,
     activeIndex,
     setActiveIndex,
     categoriesPageInfo,
   } = useCatalogue();
-  console.log('active', activeIndex);
+
   return (
     <View style={styles.catalogueScreenContainer}>
       {/* Catalogue Header */}
@@ -46,7 +45,7 @@ const CatalogueScreen = () => {
         <Feather name="search" color="#EFE3C8" size={20} />
         {/* Search Icon here */}
         <TextInput
-          placeholder="Browse for your favourite coffee..."
+          placeholder={`Browse in ${categories?.[activeIndex]?.name}....`}
           cursorColor="#EFE3C8"
           placeholderTextColor="#EFE3C8"
           value={searchString}

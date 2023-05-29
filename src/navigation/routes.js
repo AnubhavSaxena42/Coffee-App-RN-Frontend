@@ -8,4 +8,6 @@ export const ROUTES = {
   FAVOURITES_STACK: 'FavouritesStack',
   SETTINGS_SCREEN: 'SettingsScreen',
   FAVOURITES_SCREEN: 'FavouritesScreen',
+  REGISTER_USER_SCREEN: 'RegisterUserScreen',
+  LOGIN_SCREEN: 'LoginScreen',
 };
