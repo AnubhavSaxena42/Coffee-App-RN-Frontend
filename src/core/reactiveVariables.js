@@ -1,5 +1,5 @@
 import {makeVar} from '@apollo/client';
 
-export const authToken = makeVar(undefined);
-export const user = makeVar(undefined);
-export const refreshToken = makeVar(undefined);
+export const authTokenVar = makeVar(undefined);
+export const userVar = makeVar(undefined);
+export const refreshTokenVar = makeVar(undefined);

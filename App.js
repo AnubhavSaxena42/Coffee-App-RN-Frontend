@@ -6,9 +6,9 @@ import {APP_BACKGROUND_COLOR} from './src/core/constants';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
 import {NavigationContainer} from '@react-navigation/native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import {MyTabs} from './src/navigation/TabNavigator';
 import {ApolloProvider} from '@apollo/client';
 import client from './src/core/client';
+import {AppNavigator} from './src/navigation/AppNavigator';
 
 const App = () => {
   return (
@@ -21,7 +21,8 @@ const App = () => {
         }}>
         <ApolloProvider client={client}>
           <NavigationContainer>
-            <MyTabs />
+            {/* <MyTabs /> */}
+            <AppNavigator />
           </NavigationContainer>
           {/* <CatalogueScreen /> */}
           {/* <CoffeeViewScreen /> */}

@@ -1,7 +1,14 @@
-import {View, Text, TextInput, Pressable} from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  ActivityIndicator,
+  Pressable,
+} from 'react-native';
 import React from 'react';
 import {styles} from './styles';
 import {useRegister} from './useRegister';
+import {APP_BACKGROUND_COLOR} from '../../core/constants';
 
 const RegisterUserScreen = () => {
   const {
@@ -14,6 +21,7 @@ const RegisterUserScreen = () => {
     phoneNumber,
     onSubmit,
     setPhoneNumber,
+    registerLoading,
   } = useRegister();
 
   return (
@@ -61,7 +69,10 @@ const RegisterUserScreen = () => {
         style={styles.input}
       />
       <Pressable onPress={onSubmit} style={styles.signUpBtn}>
-        <Text style={styles.signUpBtnTxt}>Continue</Text>
+        {!registerLoading && <Text style={styles.signUpBtnTxt}>Continue</Text>}
+        {registerLoading && (
+          <ActivityIndicator size="small" color={APP_BACKGROUND_COLOR} />
+        )}
       </Pressable>
     </View>
   );

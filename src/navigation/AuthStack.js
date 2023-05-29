@@ -1,13 +1,12 @@
 import {createStackNavigator} from '@react-navigation/stack';
-import CatalogueScreen from '../screens/CatalogueScreen/CatalogueScreen';
-import CoffeeViewScreen from '../screens/CoffeeViewScreen/CoffeeViewScreen';
 import LoginScreen from '../screens/LoginScreen/LoginScreen';
 import RegisterUserScreen from '../screens/RegisterUserScreen/RegisterUserScreen';
+import SplashScreen from '../screens/SplashScreen/SplashScreen';
 import {ROUTES} from './routes';
 
 const Stack = createStackNavigator();
 
-export const CatalogueStack = () => {
+export const AuthStack = () => {
   return (
     <Stack.Navigator
       screenOptions={() => {
@@ -16,13 +15,11 @@ export const CatalogueStack = () => {
           headerShown: false,
         };
       }}>
+      <Stack.Screen name={ROUTES.SPLASH_SCREEN} component={SplashScreen} />
+      <Stack.Screen name={ROUTES.LOGIN_SCREEN} component={LoginScreen} />
       <Stack.Screen
-        name={ROUTES.CATALOGUE_SCREEN}
-        component={CatalogueScreen}
-      />
-      <Stack.Screen
-        name={ROUTES.COFFEE_VIEW_SCREEN}
-        component={CoffeeViewScreen}
+        name={ROUTES.REGISTER_USER_SCREEN}
+        component={RegisterUserScreen}
       />
     </Stack.Navigator>
   );

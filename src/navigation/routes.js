@@ -10,4 +10,7 @@ export const ROUTES = {
   FAVOURITES_SCREEN: 'FavouritesScreen',
   REGISTER_USER_SCREEN: 'RegisterUserScreen',
   LOGIN_SCREEN: 'LoginScreen',
+  AUTH_STACK: 'AUTH_STACK',
+  APP_VIEW: 'APP_VIEW',
+  SPLASH_SCREEN: 'SPLASH_SCREEN',
 };

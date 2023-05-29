@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
   cartScreenHeaderTxt: {
     fontSize: 25,
     textAlign: 'center',
-    color: 'white',
+    color: '#EFE3C8',
     marginBottom: 15,
     fontFamily: FONTS.ROSARIVO_REGULAR,
   },

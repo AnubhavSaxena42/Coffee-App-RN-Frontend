@@ -1,7 +1,8 @@
+import {useNavigation} from '@react-navigation/native';
 import {useState} from 'react';
 import client from '../../core/client';
-import {STORAGE_KEYS} from '../../core/enums';
-import {saveItemToStorage} from '../../services/storage-service';
+import {saveUserInfoToStorageAndState} from '../../core/helpers';
+import {ROUTES} from '../../navigation/routes';
 import {CREATE_TOKEN} from '../LoginScreen/mutations';
 import {REGISTER_USER, UPDATE_ACCOUNT, USER_VERIFY} from './mutations';
 
@@ -10,8 +11,12 @@ export const useRegister = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password1, setPassword1] = useState('');
   const [password2, setPassword2] = useState('');
+  const [registerLoading, setRegisterLoading] = useState(false);
+  const navigation = useNavigation();
 
   const onSubmit = async () => {
+    if (registerLoading) return;
+    setRegisterLoading(true);
     if (
       name === '' ||
       phoneNumber?.length < 10 ||
@@ -19,6 +24,7 @@ export const useRegister = () => {
       password2 === ''
     ) {
       //toast
+      setRegisterLoading(false);
       return;
     }
     const registerResponse = await client?.mutate({
@@ -37,6 +43,7 @@ export const useRegister = () => {
         Object.values(registerResponse?.data?.register?.errors)[0]?.[0]
           ?.message,
       );
+      setRegisterLoading(false);
       return;
     }
     const tokenResponse = await client?.mutate({
@@ -48,18 +55,7 @@ export const useRegister = () => {
       fetchPolicy: 'no-cache',
     });
     console.log('Log In Response:', tokenResponse);
-    await saveItemToStorage(
-      STORAGE_KEYS?.TOKEN,
-      tokenResponse?.data?.tokenAuth?.token,
-    );
-    await saveItemToStorage(
-      STORAGE_KEYS?.REFRESH_TOKEN,
-      tokenResponse?.data?.tokenAuth?.refreshToken,
-    );
-    await saveItemToStorage(
-      STORAGE_KEYS?.USER,
-      JSON.stringify(tokenResponse?.data?.tokenAuth?.user),
-    );
+
     const verifyResponse = await client.mutate({
       mutation: USER_VERIFY,
       variables: {
@@ -77,7 +73,26 @@ export const useRegister = () => {
       fetchPolicy: 'no-cache',
     });
     console.log('Update Account Response:', updateAccount);
+    // await saveItemToStorage(
+    //     STORAGE_KEYS?.TOKEN,
+    //     tokenResponse?.data?.tokenAuth?.token,
+    //   );
+    //   await saveItemToStorage(
+    //     STORAGE_KEYS?.REFRESH_TOKEN,
+    //     tokenResponse?.data?.tokenAuth?.refreshToken,
+    //   );
+    //   await saveItemToStorage(
+    //     STORAGE_KEYS?.USER,
+    //     JSON.stringify(tokenResponse?.data?.tokenAuth?.user),
+    //   );
+    await saveUserInfoToStorageAndState({
+      token: tokenResponse?.data?.tokenAuth?.token,
+      refreshToken: tokenResponse?.data?.tokenAuth?.refreshToken,
+      user: tokenResponse?.data?.tokenAuth?.user,
+    });
     //toast and navigate to store
+    navigation.replace(ROUTES.APP_VIEW);
+    setRegisterLoading(false);
   };
 
   return {
@@ -89,6 +104,7 @@ export const useRegister = () => {
     setPassword1,
     onSubmit,
     password2,
+    registerLoading,
     setPassword2,
   };
 };

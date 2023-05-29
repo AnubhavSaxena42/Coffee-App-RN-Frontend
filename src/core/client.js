@@ -6,6 +6,8 @@ import {
   saveItemToStorage,
 } from '../services/storage-service';
 import {STORAGE_KEYS} from './enums';
+import {saveUserInfoToStorageAndState} from './helpers';
+
 const BASE_URL = 'http://127.0.0.1:8000/graphql';
 const httpLink = createHttpLink({
   uri: BASE_URL,
@@ -40,14 +42,19 @@ const verifyAndRefreshToken = async ({token, refreshToken}) => {
     fetchPolicy: 'no-cache',
   });
   console.log('Verify function refresh', refreshResponse, refreshToken, token);
-  await saveItemToStorage(
-    STORAGE_KEYS.REFRESH_TOKEN,
-    refreshResponse?.data?.refreshToken?.refreshToken,
-  );
-  await saveItemToStorage(
-    STORAGE_KEYS.TOKEN,
-    refreshResponse?.data?.refreshToken?.token,
-  );
+  //   await saveItemToStorage(
+  //     STORAGE_KEYS.REFRESH_TOKEN,
+  //     refreshResponse?.data?.refreshToken?.refreshToken,
+  //   );
+  //   await saveItemToStorage(
+  //     STORAGE_KEYS.TOKEN,
+  //     refreshResponse?.data?.refreshToken?.token,
+  //   );
+  await saveUserInfoToStorageAndState({
+    token: refreshResponse?.data?.refreshToken?.token,
+    refreshToken: refreshResponse?.data?.refreshToken?.refreshToken,
+    user: null,
+  });
   return {
     token: refreshResponse?.data?.refreshToken?.token,
     refreshToken: refreshResponse?.data?.refreshToken?.refreshToken,
