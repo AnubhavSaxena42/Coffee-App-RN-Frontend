@@ -1,17 +1,72 @@
 import {ApolloClient, createHttpLink, InMemoryCache} from '@apollo/client';
 import {setContext} from '@apollo/client/link/context';
-import {getItemFromStorage} from '../services/storage-service';
+import {REFRESH_TOKEN, VERIFY_TOKEN} from '../gql/mutations';
+import {
+  getItemFromStorage,
+  saveItemToStorage,
+} from '../services/storage-service';
 import {STORAGE_KEYS} from './enums';
 const BASE_URL = 'http://127.0.0.1:8000/graphql';
-
-const getAccessToken = async () => {
-  const localtoken = await getItemFromStorage(STORAGE_KEYS.TOKEN);
-  return localtoken;
-};
-
 const httpLink = createHttpLink({
   uri: BASE_URL,
 });
+
+const verifyAndRefreshToken = async ({token, refreshToken}) => {
+  console.log('In verify function');
+  const verifyClient = new ApolloClient({
+    link: httpLink,
+    cache: new InMemoryCache(),
+  });
+  console.log('before verify:', verifyClient, httpLink, token);
+
+  const verifyResponse = await verifyClient.mutate({
+    mutation: VERIFY_TOKEN,
+    variables: {
+      token: token,
+    },
+    fetchPolicy: 'no-cache',
+  });
+  console.log('verify response ,', verifyResponse);
+  if (verifyResponse?.data?.verifyToken?.success) {
+    console.log('Verify function verified');
+    return {token, refreshToken};
+  }
+
+  const refreshResponse = await verifyClient.mutate({
+    mutation: REFRESH_TOKEN,
+    variables: {
+      refreshToken: refreshToken,
+    },
+    fetchPolicy: 'no-cache',
+  });
+  console.log('Verify function refresh', refreshResponse, refreshToken, token);
+  await saveItemToStorage(
+    STORAGE_KEYS.REFRESH_TOKEN,
+    refreshResponse?.data?.refreshToken?.refreshToken,
+  );
+  await saveItemToStorage(
+    STORAGE_KEYS.TOKEN,
+    refreshResponse?.data?.refreshToken?.token,
+  );
+  return {
+    token: refreshResponse?.data?.refreshToken?.token,
+    refreshToken: refreshResponse?.data?.refreshToken?.refreshToken,
+  };
+};
+
+const getAccessToken = async () => {
+  const localtoken = await getItemFromStorage(STORAGE_KEYS.TOKEN);
+  const refreshToken = await getItemFromStorage(STORAGE_KEYS.REFRESH_TOKEN);
+
+  if (localtoken && refreshToken) {
+    const {token} = await verifyAndRefreshToken({
+      token: localtoken,
+      refreshToken: refreshToken,
+    });
+    return token;
+  }
+  return localtoken;
+};
 
 const authLink = setContext(async (_, {headers}) => {
   console.log('In Authlink function');
@@ -35,7 +90,6 @@ const authLink = setContext(async (_, {headers}) => {
 
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
-  //   uri: BASE_URL,
   cache: new InMemoryCache(),
 });
 
